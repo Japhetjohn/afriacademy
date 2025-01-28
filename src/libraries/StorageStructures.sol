@@ -7,13 +7,13 @@ library StorageStructures {
         bool isRegistered;
         uint256 enrollmentDate;
         uint256[] completedCourses;
-        mapping(uint256 => uint256) courseProgress;  // courseId => progress percentage
+        mapping(uint256 => uint8) courseProgress; // courseId => completed modules
     }
 
     struct Course {
         string name;
-        uint256 duration;        // in seconds
-        uint256 requiredScore;   // minimum score to pass (0-100)
+        uint256 duration; // in seconds
+        uint8 requiredScore; // minimum score to pass (0-100)
         bool isActive;
         uint256 totalEnrolled;
         mapping(address => bool) enrolledStudents;
@@ -26,6 +26,8 @@ library StorageStructures {
         uint256 score;
         string ipfsHash;
         bool isValid;
+        string issuer; // Name of issuing institution
+        string additionalData; // IPFS hash for extended metadata
     }
 
     struct ExamResult {
@@ -33,6 +35,10 @@ library StorageStructures {
         uint256 score;
         uint256 timestamp;
         bool verified;
-        string examHash;  // IPFS hash of exam details
+        string examHash; // IPFS hash of exam details
     }
+
+    error InvalidStudent();
+    error CourseNotActive();
+    error UnauthorizedAccess();
 }
