@@ -2,10 +2,6 @@ from sqlalchemy.orm import Session
 from app.models import User  # Replace with your actual model
 import pymysql
 
-# Function to get a user from the database using SQLAlchemy
-def get_user(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
-
 # Database configuration for pymysql
 db_config = {
     "host": "localhost",
@@ -23,3 +19,6 @@ def get_connection():
         print("Error connecting to database:", e)
         return None
 
+# Function to get a user from the database using SQLAlchemy
+def get_user(db: Session, user_id: int):
+    return db.query(User).filter(User.id == user_id).first()
